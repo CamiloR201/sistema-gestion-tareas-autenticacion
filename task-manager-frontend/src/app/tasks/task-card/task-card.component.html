@@ -1,0 +1,34 @@
+<mat-card class="task-card" [class.completed]="task.status === 'completed'">
+    <mat-card-content>
+        <!-- Header -->
+        <div class="card-header">
+            <div class="badges">
+                <span class="badge" [ngClass]="statusColor">{{ statusLabel }}</span>
+                <span class="badge badge-sm" [ngClass]="priorityColor">{{ priorityLabel }}</span>
+            </div>
+            <div class="actions">
+                <button mat-icon-button (click)="onToggle.emit(task)"
+                    [matTooltip]="task.status === 'completed' ? 'Marcar pendiente' : 'Marcar completada'"
+                    class="action-btn">
+                    <mat-icon>{{ task.status === 'completed' ? 'undo' : 'check_circle' }}</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onEdit.emit(task)" matTooltip="Editar" class="action-btn">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onDelete.emit(task)" matTooltip="Eliminar" class="action-btn danger">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <h3 class="task-title" [class.strikethrough]="task.status === 'completed'">{{ task.title }}</h3>
+        <p class="task-desc" *ngIf="task.description">{{ task.description }}</p>
+
+        <!-- Footer -->
+        <div class="card-footer" *ngIf="task.dueDate">
+            <mat-icon class="due-icon">calendar_today</mat-icon>
+            <span class="due-date">{{ task.dueDate | date: 'dd/MM/yyyy' }}</span>
+        </div>
+    </mat-card-content>
+</mat-card>

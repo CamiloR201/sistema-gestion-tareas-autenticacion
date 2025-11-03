@@ -1,0 +1,19 @@
+# Ignorar node_modules globales (aunque cada carpeta tiene el suyo)
+node_modules/
+
+# Variables de entorno
+.env
+
+# Directorios de build
+dist/
+out/
+
+# Entornos de desarrollo locales
+.vscode/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

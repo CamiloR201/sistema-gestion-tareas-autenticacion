@@ -1,0 +1,55 @@
+<div class="dialog-container">
+    <div mat-dialog-title class="dialog-title">
+        <mat-icon>{{ isEdit ? 'edit' : 'add_task' }}</mat-icon>
+        <span>{{ isEdit ? 'Editar Tarea' : 'Nueva Tarea' }}</span>
+    </div>
+
+    <mat-dialog-content>
+        <form [formGroup]="form" class="task-form">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Título *</mat-label>
+                <input matInput id="task-title" formControlName="title" placeholder="Título de la tarea" />
+                <mat-error *ngIf="form.get('title')?.hasError('required')">El título es requerido</mat-error>
+                <mat-error *ngIf="form.get('title')?.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput id="task-description" formControlName="description" rows="3"
+                    placeholder="Descripción opcional..."></textarea>
+            </mat-form-field>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>Estado</mat-label>
+                    <mat-select id="task-status" formControlName="status">
+                        <mat-option *ngFor="let opt of statusOptions" [value]="opt.value">{{ opt.label }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="half-width">
+                    <mat-label>Prioridad</mat-label>
+                    <mat-select id="task-priority" formControlName="priority">
+                        <mat-option *ngFor="let opt of priorityOptions" [value]="opt.value">{{ opt.label }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Fecha límite</mat-label>
+                <input matInput [matDatepicker]="picker" id="task-duedate" formControlName="dueDate"
+                    placeholder="Selecciona una fecha" />
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" class="dialog-actions">
+        <button mat-button (click)="onCancel()" id="cancel-task-btn">Cancelar</button>
+        <button mat-raised-button color="primary" id="save-task-btn" (click)="onSubmit()"
+            [disabled]="loading || form.invalid">
+            {{ isEdit ? 'Guardar cambios' : 'Crear tarea' }}
+        </button>
+    </mat-dialog-actions>
+</div>

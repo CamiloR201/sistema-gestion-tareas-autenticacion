@@ -1,0 +1,210 @@
+/* ================================================
+   TaskFlow — Global Styles (Dark Theme)
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* ---- CSS Custom Properties ---- */
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #161b27;
+  --surface: #1a2035;
+  --surface-2: #1e2741;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --accent: #7c4dff;
+  --accent-light: #b47cff;
+  --accent-dark: #5c35c9;
+  --text-primary: #e8eaf6;
+  --text-secondary: #8892b0;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #f44336;
+}
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ---- Angular Material Overrides ---- */
+
+/* Input fields */
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-outline-color: var(--border);
+  --mdc-outlined-text-field-hover-outline-color: var(--accent);
+  --mdc-outlined-text-field-focus-outline-color: var(--accent);
+  --mdc-outlined-text-field-input-text-color: var(--text-primary);
+  --mdc-outlined-text-field-label-text-color: var(--text-secondary);
+  --mdc-outlined-text-field-container-color: var(--surface);
+}
+
+/* Buttons */
+.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark)) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(124, 77, 255, 0.3) !important;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(124, 77, 255, 0.5) !important;
+  }
+}
+
+/* Dialog */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--surface) !important;
+  border-radius: 16px !important;
+
+  .mdc-dialog__surface {
+    border-radius: 16px !important;
+  }
+}
+
+.task-dialog .mat-mdc-dialog-container {
+  border: 1px solid var(--border);
+}
+
+/* Toolbar */
+.mat-toolbar {
+  color: var(--text-primary) !important;
+}
+
+/* Select */
+.mat-mdc-select-panel {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.mat-mdc-option {
+  color: var(--text-primary) !important;
+}
+
+.mat-mdc-option:hover {
+  background: rgba(124, 77, 255, 0.1) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected {
+  color: var(--accent) !important;
+}
+
+/* Datepicker */
+.mat-datepicker-content {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.mat-calendar-body-cell-content {
+  color: var(--text-primary) !important;
+}
+
+.mat-calendar-body-selected {
+  background: var(--accent) !important;
+}
+
+/* Snackbar */
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: var(--surface-2);
+  --mdc-snackbar-supporting-text-color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px !important;
+}
+
+.error-snack .mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: rgba(244, 67, 54, 0.15);
+  border-color: rgba(244, 67, 54, 0.4);
+}
+
+/* Chips */
+.mat-mdc-chip {
+  border-radius: 20px !important;
+}
+
+/* Progress Spinner */
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #fff;
+}
+
+/* Tabs */
+.mat-mdc-tab-header {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.mat-mdc-tab {
+  color: var(--text-secondary) !important;
+}
+
+.mat-mdc-tab.mdc-tab--active {
+  color: var(--accent) !important;
+}
+
+.mat-mdc-tab-indicator__content--underline {
+  border-color: var(--accent) !important;
+}
+
+/* Icon prefix/suffix */
+[matPrefix],
+[matSuffix] {
+  color: var(--text-secondary);
+}
+
+/* Menu */
+.mat-mdc-menu-panel {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+}
+
+.mat-mdc-menu-item {
+  color: var(--text-primary) !important;
+}
+
+.mat-mdc-menu-item:hover {
+  background: rgba(124, 77, 255, 0.1) !important;
+}
+
+/* ---- Utilities ---- */
+.text-accent {
+  color: var(--accent);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}

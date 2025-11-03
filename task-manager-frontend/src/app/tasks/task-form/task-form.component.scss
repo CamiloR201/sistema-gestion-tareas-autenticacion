@@ -1,0 +1,52 @@
+.dialog-container {
+    background: var(--surface);
+    border-radius: 16px;
+}
+
+.dialog-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 1.5rem 1.5rem 0;
+
+    mat-icon {
+        color: var(--accent);
+    }
+}
+
+mat-dialog-content {
+    padding: 1rem 1.5rem !important;
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 0.5rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.half-width {
+    flex: 1;
+}
+
+.dialog-actions {
+    padding: 0.75rem 1.5rem 1.5rem !important;
+    gap: 0.5rem;
+
+    button[mat-raised-button] {
+        border-radius: 10px !important;
+        font-weight: 600;
+    }
+}

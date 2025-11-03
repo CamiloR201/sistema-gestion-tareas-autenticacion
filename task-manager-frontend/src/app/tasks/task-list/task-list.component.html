@@ -1,0 +1,75 @@
+<div class="tasks-layout">
+    <!-- Navbar -->
+    <mat-toolbar class="navbar">
+        <div class="navbar-brand">
+            <mat-icon class="brand-icon">task_alt</mat-icon>
+            <span class="brand-name">TaskFlow</span>
+        </div>
+        <span class="spacer"></span>
+        <div class="navbar-user">
+            <span class="user-name">{{ auth.currentUser()?.name }}</span>
+            <button mat-icon-button [matMenuTriggerFor]="userMenu" matTooltip="Opciones">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #userMenu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>logout</mat-icon>
+                    <span>Cerrar sesión</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+
+    <!-- Main -->
+    <main class="main-content">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="header-text">
+                <h1 class="page-title">Mis Tareas</h1>
+                <p class="page-subtitle">
+                    {{ tasks().length }} tareas · {{ pendingCount }} pendientes · {{ completedCount }} completadas
+                </p>
+            </div>
+            <button mat-raised-button color="primary" id="create-task-btn" class="create-btn"
+                (click)="openCreateDialog()">
+                <mat-icon>add</mat-icon>
+                Nueva Tarea
+            </button>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="filters-bar">
+            <div class="filter-tabs">
+                <button *ngFor="let tab of filterTabs" class="filter-tab" [class.active]="activeFilter === tab.value"
+                    (click)="onFilterChange(tab.value)">
+                    {{ tab.label }}
+                </button>
+            </div>
+
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput id="task-search" placeholder="Buscar tareas..." [(ngModel)]="searchQuery"
+                    (keyup.enter)="onSearch()" (input)="onSearch()" />
+            </mat-form-field>
+        </div>
+
+        <!-- Task Grid -->
+        <div *ngIf="loading()" class="loading-container">
+            <mat-progress-spinner mode="indeterminate" diameter="48"></mat-progress-spinner>
+        </div>
+
+        <div *ngIf="!loading() && tasks().length === 0" class="empty-state">
+            <mat-icon class="empty-icon">inbox</mat-icon>
+            <h3>No hay tareas</h3>
+            <p>{{ activeFilter ? 'No hay tareas con este filtro.' : 'Crea tu primera tarea.' }}</p>
+            <button mat-raised-button color="primary" (click)="openCreateDialog()">
+                <mat-icon>add</mat-icon> Crear Tarea
+            </button>
+        </div>
+
+        <div *ngIf="!loading() && tasks().length > 0" class="task-grid">
+            <app-task-card *ngFor="let task of tasks(); trackBy: trackById" [task]="task" (onToggle)="onToggle($event)"
+                (onEdit)="openEditDialog($event)" (onDelete)="onDelete($event)"></app-task-card>
+        </div>
+    </main>
+</div>
